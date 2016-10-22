@@ -18,7 +18,7 @@ int main(int argc, char* argv[])
 {
   int i, passed=0, failed=0, errors=0;
   for (i = 0; i < sizeof(array_of_tests) / sizeof(unit_test); ++i) {
-    int current_test_errors = execute_test(sfr_string_tests[i]);
+    int current_test_errors = execute_test(array_of_tests[i]);
     if (current_test_errors > 0) {
       ++failed;
       errors += current_test_errors;
