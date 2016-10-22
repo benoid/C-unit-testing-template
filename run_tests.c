@@ -9,7 +9,7 @@
 typedef struct test_info (*unit_test)(void);
 
 const array_of_tests[] = {
-
+  /* Pointers to test functions go here */
 };
 
 int execute_test(struct test_info (*test)());
@@ -17,7 +17,7 @@ int execute_test(struct test_info (*test)());
 int main(int argc, char* argv[])
 {
   int i, passed=0, failed=0, errors=0;
-  for (i = 0; i < sizeof(sfr_string_tests) / sizeof(unit_test); ++i) {
+  for (i = 0; i < sizeof(array_of_tests) / sizeof(unit_test); ++i) {
     int current_test_errors = execute_test(sfr_string_tests[i]);
     if (current_test_errors > 0) {
       ++failed;
