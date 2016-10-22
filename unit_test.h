@@ -5,8 +5,7 @@
 */
 #ifndef UNIT_TEST_H
 #define UNIT_TEST_H
- #include "../ansi_colors.h"
-
+ 
 #define ERR_LENGTH_MAX 128
 #define MAX_NUM_ERRORS 64
 
