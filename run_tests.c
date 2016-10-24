@@ -8,7 +8,7 @@
 
 typedef struct test_info (*unit_test)(void);
 
-const array_of_tests[] = {
+const unit_test array_of_tests[] = {
   /* Pointers to test functions go here */
 };
 
