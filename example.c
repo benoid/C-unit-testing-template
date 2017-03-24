@@ -1,7 +1,7 @@
 /* For this example, we will implement a set of 
    simple arithmetic functions. */
 
-#include "unit_test.h"
+#include "c-mini-test.h"
 
    /* The API */
 
@@ -64,7 +64,7 @@ void test_divide_works_correctly() {
   TEST_CASE(divide(6, -2) == -3, "divide(6, -2) did not return -3");
 }
 
-unit_test test_suite[] = {
+const unit_test test_suite[] = {
   test_add_works_correctly,
   test_subtract_works_correctly,
   test_multiply_works_correctly,

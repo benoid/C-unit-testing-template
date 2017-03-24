@@ -5,7 +5,7 @@
 */
 #include <string.h>
 #include <stdio.h>
-#include "unit_test.h"
+#include "c-mini-test.h"
 
 struct test_info {
   char test_name[ERR_LENGTH_MAX];
@@ -54,7 +54,7 @@ int execute_test(void (*test)()) {
   }
 }
 
-int run_test_suite(unit_test *array_of_tests, char *test_suite_name, unsigned int num_tests)
+int run_test_suite(const unit_test *array_of_tests, char *test_suite_name, unsigned int num_tests)
 {
   int i, passed=0, failed=0, errors=0;
   printf("Running Test Suite: %s\n", test_suite_name);
