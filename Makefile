@@ -1,4 +1,4 @@
-tests: run_tests.c unit_test.c
-	gcc -o run_tests run_tests.c unit_test.c 
+example: example.c unit_test.c
+	gcc -o example example.c unit_test.c 
 clean:
-	rm run_tests
+	rm example
