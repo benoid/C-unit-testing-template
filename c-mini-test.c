@@ -7,28 +7,20 @@
 #include <stdio.h>
 #include "c-mini-test.h"
 
-struct test_info {
-  char test_name[ERR_LENGTH_MAX];
-  unsigned int num_errors;
-  char error_list[MAX_NUM_ERRORS][ERR_LENGTH_MAX];
-};
-
-struct test_info THE_TEST_INFO;
-
-void test_info_init() {
-  THE_TEST_INFO.num_errors = 0;
-  strncpy(THE_TEST_INFO.test_name, "Unknown Test", ERR_LENGTH_MAX);
+void test_info_init(struct test_info* t) {
+  t->num_errors = 0;
+  strncpy(t->test_name, "Unknown Test", ERR_LENGTH_MAX);
 }
 
-void SET_TEST_NAME(char* test_name) {
-  strncpy(THE_TEST_INFO.test_name, test_name, ERR_LENGTH_MAX);
+void set_test_name(struct test_info* t, char* test_name) {
+  strncpy(t->test_name, test_name, ERR_LENGTH_MAX);
 }
 
-void TEST_CASE(int expression, char* fail_notification) {
+void test_case(struct test_info* t, int expression, char* fail_notification) {
   if (!expression) {
-    if (THE_TEST_INFO.num_errors < MAX_NUM_ERRORS) {
-      strncpy(THE_TEST_INFO.error_list[THE_TEST_INFO.num_errors], fail_notification, ERR_LENGTH_MAX);
-      THE_TEST_INFO.num_errors++;
+    if (t->num_errors < MAX_NUM_ERRORS) {
+      strncpy(t->error_list[t->num_errors], fail_notification, ERR_LENGTH_MAX);
+      t->num_errors++;
     }
     else {
       printf("WARNING: cannot append test failure: %s to test_info."
@@ -38,19 +30,19 @@ void TEST_CASE(int expression, char* fail_notification) {
   }
 }   
 
-int execute_test(void (*test)()) {
+int execute_test(unit_test test) {
   int i;
-  test_info_init();
-  test();
-  if (THE_TEST_INFO.num_errors == 0) {
-    printf("PASSED: %s\n", THE_TEST_INFO.test_name);
+  struct test_info t; 
+  t = test();
+  if (t.num_errors == 0) {
+    printf("PASSED: %s\n", t.test_name);
     return 0;
   }
   else   {
-    printf("FAILED: %s \n    WITH ERRORS: ", THE_TEST_INFO.test_name);
-    for (i = 0; i < THE_TEST_INFO.num_errors; ++i)
-      printf("%s\n                 ", THE_TEST_INFO.error_list[i]);
-    return THE_TEST_INFO.num_errors;
+    printf("FAILED: %s \n    WITH ERRORS: ", t.test_name);
+    for (i = 0; i < t.num_errors; ++i)
+      printf("%s\n                 ", t.error_list[i]);
+    return t.num_errors;
   }
 }
 
